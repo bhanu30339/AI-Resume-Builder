@@ -18,26 +18,26 @@ export class Resume {
   summary: string;
 
   @Column('json', { nullable: true })
-  education: any; // Array of education objects
+education: any;
 
-  @Column('json', { nullable: true })
-  experience: any; // Array of experience objects
+@Column('json', { nullable: true })
+experience: any;
 
-  @Column('json', { nullable: true })
-  skills: string[]; // List of skills
+@Column('json', { nullable: true })
+skills: string[];
 
-  @Column('json', { nullable: true })
-  projects: any; // Array of projects
+@Column('json', { nullable: true })
+projects: any;
 
-  @Column({ nullable: true })
-  linkedin: string;
+@Column({ nullable: true })
+linkedin: string;
 
-  @Column({ nullable: true })
-  github: string;
+@Column({ nullable: true })
+github: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+@CreateDateColumn()
+createdAt: Date;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+@UpdateDateColumn()
+updatedAt: Date;
 }

@@ -19,16 +19,18 @@ export class ResumeService {
   }
 
   async findAll() {
-    return this.resumeRepository.find();
-  }
+  return this.resumeRepository.find(); 
+}
+
 
   async findOne(id: string) {
-    const resume = await this.resumeRepository.findOne({ where: { id } });
-    if (!resume) {
-      throw new NotFoundException(`Resume with ID ${id} not found`);
-    }
-    return resume;
+  const resume = await this.resumeRepository.findOne({ where: { id } }); 
+  if (!resume) {
+    throw new NotFoundException(`Resume with ID ${id} not found`);
   }
+  return resume;
+}
+
 
   async update(id: string, updateResumeDto: UpdateResumeDto) {
     const resume = await this.findOne(id); // ensures it exists

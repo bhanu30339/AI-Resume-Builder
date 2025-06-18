@@ -30,6 +30,7 @@ export class ResumeController {
   findOne(@Param('id') id: string) {
     return this.resumeService.findOne(id);
   }
+  
 
   @Patch(':id')
   update(
