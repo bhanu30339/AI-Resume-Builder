@@ -1,7 +1,7 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString,IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
-class ExperienceDto {
+export class ExperienceDto {
   @IsNotEmpty()
   @IsString()
   company: string;
@@ -12,23 +12,71 @@ class ExperienceDto {
 
   @IsNotEmpty()
   @IsString()
-  duration: string;
-}
+  startDate: string;
 
-class EducationDto {
   @IsNotEmpty()
   @IsString()
-  institution: string;
+  endDate: string;
 
+  @IsNotEmpty()
+  @IsString()
+  location: string;
+}
+
+
+export class EducationDto {
   @IsNotEmpty()
   @IsString()
   degree: string;
 
   @IsNotEmpty()
   @IsString()
+  stream: string;
+
+  @IsNotEmpty()
+  @IsString()
+  institution: string;
+
+  @IsNotEmpty()
+  @IsString()
+  university: string;
+
+  @IsNotEmpty()
+  @IsString()
+  location: string;
+
+  @IsNotEmpty()
+  @IsString()
   year: string;
+
+  @IsNotEmpty()
+  @IsString()
+  percentage: string;
 }
 
+export class ProjectDto {
+  @IsNotEmpty()
+  client: string;
+
+  @IsNotEmpty()
+  projectName: string;
+
+  @IsNotEmpty()
+  environment: string;
+
+  @IsNotEmpty()
+  duration: string;
+
+  @IsNotEmpty()
+  role: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  responsibilities: string[];
+}
+
+// Union type for project field
+type ProjectsField = string | ProjectDto[];
 export class CreateResumeDto {
   @IsNotEmpty()
   @IsString()
@@ -57,4 +105,10 @@ export class CreateResumeDto {
   @IsOptional()
   @IsString({ each: true })
   skills?: string[];
+  @IsOptional()
+  @IsArray({ message: 'Projects must be a string or valid project objects' })
+  @ValidateNested({ each: true })
+  @Type(() => ProjectDto)
+  projects?: ProjectsField;
 }
+
